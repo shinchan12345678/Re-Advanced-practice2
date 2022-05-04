@@ -4,7 +4,7 @@
       <span  class="text-primary">★ <%= book.favorites.count %>いいね</spna>
     <% end %>
   <% else %>
-    <%= link_to book_favorite_path(book),method: :post do %>
+    <%= link_to book_favorites_path(book),method: :post do %>
       <span class="text-primary">☆ <%= book.favorites.count %>いいね</spna>
     <% end %>
   <% end %>
