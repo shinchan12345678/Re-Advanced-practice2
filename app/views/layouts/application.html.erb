@@ -12,7 +12,11 @@
     <%= render 'layouts/header' %>
       <main>
         <p id="notice"><%= notice %></p>
-        <%= render "searches/searches" %>
+        <% if user_signed_in? %>
+          <% unless request.path==root_path or request.path.include?("about") %>
+            <%= render "searches/searches" %>
+          <%end %>
+        <% end %>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>

@@ -34,6 +34,19 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def self.search_by(condition,query)
+    case condition
+    when "部分一致" then
+      User.where("name LIKE?","%#{query}%")
+    when "前方一致" then
+      User.where("name LIKE?","#{query}%")
+    when "後方一致" then
+      User.where("name LIKE?","%#{query}")
+    when "完全一致" then
+      User.where("name LIKE?","#{query}")
+    end
+  end
+
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end

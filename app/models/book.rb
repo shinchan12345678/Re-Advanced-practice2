@@ -9,4 +9,18 @@ class Book < ApplicationRecord
     favorites.find_by(user_id: user.id)
   end
 
+
+  def self.search_by(condition,query)
+    case condition
+    when "部分一致" then
+      Book.where("title LIKE?","%#{query}%")
+    when "前方一致" then
+      Book.where("title LIKE?","#{query}%")
+    when "後方一致" then
+      Book.where("title LIKE?","%#{query}")
+    when "完全一致" then
+      Book.where("title LIKE?","#{query}")
+    end
+  end
+
 end
