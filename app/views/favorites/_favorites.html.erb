@@ -1,6 +1,6 @@
 <div class="follow-button">
   <% if book.favorite_exist?(current_user) %>
-    <%= link_to book_favorite_path(book),method: :delete do %>
+    <%= link_to book_favorites_path(book),method: :delete do %>
       <span  class="text-primary">★ <%= book.favorites.count %>いいね</spna>
     <% end %>
   <% else %>
