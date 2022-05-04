@@ -22,7 +22,13 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true,presence: true
   validates :introduction, length: { maximum: 50 }
   
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
   
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
