@@ -16,7 +16,11 @@
         </td>
         <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
         <td><%= book.body %></td>
-        <td><%= render 'favorites/favorites', book: book %></td>
+        <td>
+          <%= content_tag :div,class: "book_#{book.id}_favorite-update-target" do %>
+            <%= render 'favorites/favorites', book: book %>
+          <% end %>
+        </td>
         <td>コメント数:<%= book.book_comments.count %></td>
       </tr>
     <% end %>

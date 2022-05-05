@@ -21,14 +21,21 @@
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% else %>
-            <td><%= render 'favorites/favorites',book: @book %></td>
-            <td>コメント数:<%= @book.book_comments.count %></td>
+            <td>
+              <%= content_tag :div,class: "book_#{@book.id}_favorite-update-target" do %>
+                <%= render 'favorites/favorites', book: @book %>
+              <% end %>
+              </td>
+            <td class="comment_count-update-target">コメント数:<%= @book.book_comments.count %></td>
           <% end %>
         </tr>
       </table>
-      <%= render "book_comments/book_comments",book: @book %>
+      <div class="comment-update-target">
+        <%= render "book_comments/book_comments",book: @book %>
+      </div>
       <div class="form-group">
-        <%= form_with model: BookComment.new(),url: book_book_comments_path(@book),method: :post do |f| %>
+        <%= form_with model: BookComment.new(),url: book_book_comments_path(@book),
+        method: :post,local: false,class: "comment-form" do |f| %>
           <%= f.text_area :body,class: "form-control mb-3" %>
           <%= f.submit "コメントする" ,class: "btn btn-secondary mb-3" %>
         <% end %>
