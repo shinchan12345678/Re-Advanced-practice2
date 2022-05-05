@@ -9,6 +9,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    # binding.pry
     @book=Book.new
   end
 
