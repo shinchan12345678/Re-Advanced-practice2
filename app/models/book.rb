@@ -22,5 +22,9 @@ class Book < ApplicationRecord
       Book.where("title LIKE?","#{query}")
     end
   end
+  
+  def self.order_all
+     Book.find(Favorite.group(:book_id).order("count(book_id) desc").pluck(:book_id))
+  end
 
 end
