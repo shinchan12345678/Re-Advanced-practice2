@@ -6,6 +6,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    # unless current_user==@user
+      current_user_relations=RoomRelation.where(user_id: current_user.id)
+      # binding.pry
+      current_user_relations.each do |user_relation|
+        if RoomRelation.where(room_id: user_relation.room_id).pluck(:user_id).include?(@user.id)
+          @roomId=user_relation.room_id
+        end
+      end
+    # end
   end
 
   def index

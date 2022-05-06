@@ -26,4 +26,9 @@
 
 <div class="row">
   <%= render "relationships/relationships" ,user: user %>
+</div> 
+<div class="row">
+  <% unless current_user==user %>
+    <%= render "rooms/rooms",{room_id: @roomId,user: user} %>
+  <% end %>
 </div>
