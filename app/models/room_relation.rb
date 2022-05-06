@@ -1,0 +1,2 @@
+class RoomRelation < ApplicationRecord
+end
