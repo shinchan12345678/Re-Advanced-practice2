@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
+  before_action :reciprocal_following?, only: [:create]
 
   def create
     @room=Room.create
@@ -25,5 +26,11 @@ class RoomsController < ApplicationController
     @room=Room.find(params[:id])
   end
 
+  private
+
+  def reciprocal_following?
+    user = User.find(params[:user_id])
+    redirect_to books_path unless current_user.following?(user)  && user.following?(current_user)
+  end
 
 end
