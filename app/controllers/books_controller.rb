@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.order_all
+    @books = Book.order_all_between
     # binding.pry
     @book=Book.new
   end
