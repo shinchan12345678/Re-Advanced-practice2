@@ -12,14 +12,18 @@
         <table class='table'>
           <tbody>
               <tr>
-                <td><%= image_tag group.get_image, size: '50x50' %></td>
+                <td><%= image_tag @group.get_image, size: '50x50' %></td>
                 <td>
-                  <%= group.group_name %>
+                  <%= @group.group_name %>
                 </td>
-                <td><%= group.introduction %></td>
+                <td><%= @group.introduction %></td>
                 <td>
                   <% if current_user==@group.owner_user %>
                     <%= link_to "Edit",edit_group_path(@group.id),method: :get ,class: "btn btn-success" %>
+                  <% else %>
+                    <% if @group.group_mambers.include?(current_user) %>
+                      <%= link_to 
+                    <% end %>
                   <% end %>
                 </td>
               </tr>
