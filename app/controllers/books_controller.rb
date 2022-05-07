@@ -5,11 +5,25 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    book_view =BookView.find_by(book_id: @book.id,user_id: current_user.id)
+    if book_view
+      sum = book_view.counter+1
+      book_view.update(book_id: @book.id,user_id: current_user.id,counter: sum)
+    else
+      BookView.create(book_id: @book.id,user_id: current_user.id,counter: 1)
+    end
+    @book_view =BookView.find_by(book_id: @book.id,user_id: current_user.id)
   end
 
   def index
-    @books = Book.order_all_between
+    # @books = Book.order_all_between
     # binding.pry
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
+    @books = Book.all.sort {|a,b|
+      b.favorites.where(created_at: from...to).size <=>
+      a.favorites.where(created_at: from...to).size
+    }
     @book=Book.new
   end
 
