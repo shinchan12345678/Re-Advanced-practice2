@@ -1,2 +1,0 @@
-module RoomRelationsHelper
-end

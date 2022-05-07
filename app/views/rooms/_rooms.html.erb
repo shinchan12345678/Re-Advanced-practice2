@@ -1,7 +1,7 @@
 <% if current_user.following?(user) && user.following?(current_user) %>
   <% if room_id %>
-    <%= link_to "チャットへ",room_path(room_id),method: :get,class: "btn btn-info my-3" %>
+    <%= link_to "チャットへ",user_room_path(user.id,room_id),method: :get,class: "btn btn-info my-3" %>
   <% else %>
-    <%= link_to "チャットを始める",rooms_path(user_id: user.id),method: :post,class: "btn btn-outline-info my-3" %>
+    <%= link_to "チャットを始める",user_rooms_path(user),method: :post,class: "btn btn-outline-info my-3" %>
   <% end %>
 <% end %>

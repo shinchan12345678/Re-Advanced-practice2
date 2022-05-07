@@ -1,6 +1,6 @@
 require "test_helper"
 
-class RoomRelationsControllerTest < ActionDispatch::IntegrationTest
+class DirectMessagesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

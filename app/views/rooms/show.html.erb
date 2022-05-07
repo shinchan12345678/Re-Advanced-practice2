@@ -1,2 +1,8 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<h2><%= @user.name %> とのチャット </h2>
+<%= form_with model: DirectMessage.new(),url: user_room_direct_messages_path(@user,@room) ,method: :post,local: false,class: "direct_message-form" do |f| %>
+  <%= f.text_field :comment %>
+  <%= f.submit "投稿" %>
+<% end %>
+<div class="direct_messages-target">
+  <%= render "direct_messages/direct_messages",direct_messages: @room.direct_messages %>
+</div>

@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     # binding.pry
     @book=Book.find(params[:book_id])

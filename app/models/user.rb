@@ -18,8 +18,9 @@ class User < ApplicationRecord
                                   foreign_key: "followed_id",
                                   dependent: :destroy
   has_many :followers,through: :passive_relationships,source: :follower
-  
+
   has_many :room_relations,dependent: :destroy
+  has_many :direct_messages,dependent: :destroy
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true,presence: true
   validates :introduction, length: { maximum: 50 }
