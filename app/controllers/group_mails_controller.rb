@@ -13,7 +13,9 @@ class GroupMailsController < ApplicationController
       group_mail.group_id=group.id
       group_mail.group_member_id=member.id
       # binding.pry
-      group_mail.save
+      if group_mail.save
+        SendMailer.send_when_push(member.user,group_mail).deliver
+      end
     end
     # binding.pry
     @mail=GroupMail.new(group_mail_params)
