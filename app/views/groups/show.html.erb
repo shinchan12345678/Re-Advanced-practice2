@@ -34,6 +34,7 @@
                 <td>
                   <% if current_user==@group.owner_user %>
                     <%= link_to "Edit",edit_group_path(@group.id),method: :get ,class: "btn btn-success" %>
+                    <%= link_to "Notice an Event" ,new_group_group_mail_path(@group),method: :get, class: "btn btn-info mx-2" %>
                   <% else %>
                     <% unless @group.group_members.pluck(:user_id).include?(current_user.id) %>
                       <%= link_to "Join this group",group_group_members_path(@group),method: :post,class: "btn btn-success" %>
