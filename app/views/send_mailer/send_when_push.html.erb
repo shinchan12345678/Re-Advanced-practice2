@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      h2 {
+        color: #e7454a;
+      }
+      hr {
+        color: #2d2a24;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><%= @user.name %>様</h2>
+    <hr>
+    <h3>
+      [Title]
+    </h3>
+    <p>
+      <%= @group_mail.title %>
+    </p>
+    <h3>
+      [Body]
+    </h3>
+    <p>
+      <%= @group_mail.body %>
+    </p>
+  </body>
+</html>
