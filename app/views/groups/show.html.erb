@@ -10,6 +10,15 @@
       <div class='col-md-8 offset-md-1'>
         <h2>Groups Detail</h2>
         <table class='table'>
+          <thead>
+            <tr>
+              <th></th>
+              <th>グループ名</th>
+              <th>紹介文</th>
+              <th>メンバー</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
               <tr>
                 <td><%= image_tag @group.get_image, size: '50x50' %></td>
@@ -18,11 +27,18 @@
                 </td>
                 <td><%= @group.introduction %></td>
                 <td>
+                  <% @group.group_members.each do |member| %>
+                    <%= member.user.name %>
+                  <% end %>
+                </td>
+                <td>
                   <% if current_user==@group.owner_user %>
                     <%= link_to "Edit",edit_group_path(@group.id),method: :get ,class: "btn btn-success" %>
                   <% else %>
-                    <% if @group.group_mambers.include?(current_user) %>
-                      <%= link_to 
+                    <% unless @group.group_members.pluck(:user_id).include?(current_user.id) %>
+                      <%= link_to "Join this group",group_group_members_path(@group),method: :post,class: "btn btn-success" %>
+                    <% else %>
+                      <%= link_to "Leave this group",group_group_members_path(@group),method: :delete,class: "btn btn-outline-success" %>
                     <% end %>
                   <% end %>
                 </td>
