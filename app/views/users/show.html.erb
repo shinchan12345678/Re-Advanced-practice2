@@ -65,7 +65,17 @@
           </tr>
         </tbody>
       </table>
-      <%= line_chart @weekly_posts,min: 0, max: 10 %>
+      <%= line_chart @weekly_posts,min: 0, max: 30 %>
+      <div class="post-search my-2">
+        <%= form_with url: user_search_path(@user),method: :get, local: false do |f| %>
+          <%= f.label :created_at, class: "control-label" %>
+          <%= f.date_field :created_at,class: "form-control" %>
+          <%= f.submit "検索" ,class: "my-2"%>
+        <% end %>
+        <div class="post-search-ansewer">
+          <%= render 'count_searches/search',day_posts: @day_posts %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

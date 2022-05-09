@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
+
+    get "search"=>"count_searches#search"
+
     resource :relationships,only: [:create,:destroy]
     resources :rooms,only: [:create,:show] do
       resources :direct_messages,only: [:create]
