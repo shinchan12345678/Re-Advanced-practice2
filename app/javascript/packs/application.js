@@ -11,7 +11,10 @@ import "jquery"
 import "popper.js"
 import "bootstrap"
 import '@fortawesome/fontawesome-free/js/all';
-import "../stylesheets/application" 
+import "../stylesheets/application"
+
+import "chartkick/chart.js"
+// import "linechart.js"
 
 Rails.start()
 Turbolinks.start()

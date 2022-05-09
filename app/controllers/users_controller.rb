@@ -16,11 +16,13 @@ class UsersController < ApplicationController
       end
     # end
     @weekly_posts=[]
+    weeks=["6日前","5日前","4日前","3日前","2日前","1日前","今日"]
     (0..6).each do |i|
       to=Time.current.at_end_of_day-i.day
       from=(Time.current.at_end_of_day-i.day).at_beginning_of_day
-      @weekly_posts.unshift(@user.week_posts.where(created_at: from..to).count)
+      @weekly_posts.unshift([weeks.pop,@user.week_posts.where(created_at: from..to).count])
     end
+    # binding.pry
   end
 
   def index

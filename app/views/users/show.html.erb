@@ -60,11 +60,12 @@
         <tbody>
           <tr>
             <% @weekly_posts.each do |i| %>
-              <td><%= i %></td>
+              <td><%= i[1] %></td>
             <% end %>
           </tr>
         </tbody>
       </table>
+      <%= line_chart @weekly_posts,min: 0, max: 10 %>
     </div>
   </div>
 </div>
