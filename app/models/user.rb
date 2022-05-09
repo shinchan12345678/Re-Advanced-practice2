@@ -76,7 +76,7 @@ class User < ApplicationRecord
       "-"
     end
   end
-    
+
   def post_diff_week
     unless self.last_week_posts.count==0
       (self.week_posts.count/self.last_week_posts.count)*100
@@ -88,5 +88,5 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
-  
+
 end

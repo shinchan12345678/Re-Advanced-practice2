@@ -15,6 +15,12 @@ class UsersController < ApplicationController
         end
       end
     # end
+    @weekly_posts=[]
+    (0..6).each do |i|
+      to=Time.current.at_end_of_day-i.day
+      from=(Time.current.at_end_of_day-i.day).at_beginning_of_day
+      @weekly_posts.unshift(@user.week_posts.where(created_at: from..to).count)
+    end
   end
 
   def index
