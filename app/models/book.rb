@@ -5,6 +5,10 @@ class Book < ApplicationRecord
   has_many :book_views,dependent: :destroy
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
+  validates :rate,numericality: {
+    less_than_or_equal_to:5,
+    greater_than_or_equal_to:1
+  }
 
   def favorite_exist?(user)
     favorites.find_by(user_id: user.id)
@@ -32,6 +36,6 @@ class Book < ApplicationRecord
   #   Book.find(Favorite.where(created_at: ((Time.current.at_end_of_day - 6.day).at_beginning_of_day)..(Time.current.at_end_of_day)).group(:book_id).order("count(book_id) desc").pluck(:book_id))
   #   end
 
-  
+
 
 end
