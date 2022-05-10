@@ -1,11 +1,11 @@
 <!--<div class="follow-button">-->
   <% if book.favorite_exist?(current_user) %>
     <%= link_to book_favorites_path(book),method: :delete,remote: true do %>
-      <span  class="text-primary">★ <%= book.favorites.count %>いいね</span>
+      <span  class="text-primary">★ <%= book.favorites.count %></span>
     <% end %>
   <% else %>
     <%= link_to book_favorites_path(book),method: :post,remote: true do %>
-      <span class="text-primary empty">☆ <%= book.favorites.count %>いいね</span>
+      <span class="text-primary empty">☆ <%= book.favorites.count %></span>
     <% end %>
   <% end %>
 <!--</div>-->

@@ -1,13 +1,23 @@
 <div class="container">
   <div class="row mb-4">
     <div class="col-md-3"></div>
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-5 offset-md-1">
+      <h6>本と投稿者の検索</h6>
       <%= form_with url: searches_path ,method: :get do |f| %>
         <%= f.text_field :query %>
         <%= f.select :model,["User","Book"] %>
         <%= f.select :condition,["部分一致","前方一致","後方一致","完全一致"] %>
-        <%= f.submit "Serach" %>
+        <%= f.submit "検索" %>
       <% end %>
+    </div>
+    <% if request.path==books_path %>
+    <div class="col-md-3">
+      <h6>カテゴリーの検索</h6>
+      <%= form_with url: searches_category_path,method: :get,local: false do |f| %>
+        <%= f.text_field :categroy %>
+        <%= f.submit "検索" %>
+      <% end %>
+    <% end %>
     </div>
   </div>
 </div>

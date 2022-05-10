@@ -28,13 +28,14 @@ class BooksController < ApplicationController
   end
 
   def create
-    binding.pry
+    # binding.pry
     @book = Book.new(book_params)
-    unless Category.find_by(category_name: params[:category_name])
+    unless Category.find_by(category_name: params.require(:book)[:category_name])
       category=Category.create(category_params)
     else
-      category=Category.find_by(category_name: params[:category_name])
+      category=Category.find_by(category_name: params.require(:book)[:category_name])
     end
+    # binding.pry
     @book.user_id = current_user.id
     @book.category_id = category.id
     if @book.save
