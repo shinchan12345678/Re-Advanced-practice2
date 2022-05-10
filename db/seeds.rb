@@ -12,6 +12,7 @@
 # end
 
 
+
 (1..5).each do |i|
   (1..5).each do |t|
     Book.create(user_id: t,title: "Star Wars#{i}",body: "seedtest",:created_at => Time.current.at_end_of_day - rand(10).days,rate: rand(5))

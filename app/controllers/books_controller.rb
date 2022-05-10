@@ -28,8 +28,15 @@ class BooksController < ApplicationController
   end
 
   def create
+    binding.pry
     @book = Book.new(book_params)
+    unless Category.find_by(category_name: params[:category_name])
+      category=Category.create(category_params)
+    else
+      category=Category.find_by(category_name: params[:category_name])
+    end
     @book.user_id = current_user.id
+    @book.category_id = category.id
     if @book.save
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
@@ -65,9 +72,13 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title,:body,:rate)
   end
 
-    def book_update_params
-      params.require(:book).permit(:title,:body)
-    end
+  def book_update_params
+    params.require(:book).permit(:title,:body)
+  end
+
+  def category_params
+    params.require(:book).permit(:category)
+  end
 
   def ensure_correct_user
     @book = Book.find(params[:id])
