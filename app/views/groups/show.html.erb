@@ -28,7 +28,7 @@
                 <td><%= @group.introduction %></td>
                 <td>
                   <% @group.group_members.each do |member| %>
-                    <%= member.user.name %>
+                    <%= member.user.name %><br>
                   <% end %>
                 </td>
                 <td>

@@ -36,6 +36,7 @@ class BooksController < ApplicationController
       @books = Book.all
       render 'index'
     end
+    # binding.pry
   end
 
   def edit
@@ -44,7 +45,8 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update(book_params)
+    # binding.pry
+    if @book.update(book_update_params)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
       render "edit"
@@ -60,8 +62,12 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title,:body)
+    params.require(:book).permit(:title,:body,:rate)
   end
+
+    def book_update_params
+      params.require(:book).permit(:title,:body)
+    end
 
   def ensure_correct_user
     @book = Book.find(params[:id])
