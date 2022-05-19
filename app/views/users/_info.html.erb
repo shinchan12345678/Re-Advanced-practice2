@@ -18,15 +18,17 @@
   </tr>
 </table>
 
+<% if user.name != "guestuser" %>
 <div class='row'>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
     <i class="fas fa-user-cog"></i>
   <% end %>
 </div>
+<% end %>
 
 <div class="row">
   <%= render "relationships/relationships" ,user: user %>
-</div> 
+</div>
 <div class="row">
   <% unless current_user==user %>
     <%= render "rooms/rooms",{room_id: @roomId,user: user} %>
