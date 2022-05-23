@@ -1,11 +1,11 @@
 class GroupsController < ApplicationController
   def new
-    @group=Group.new()
+    @group = Group.new
   end
 
   def create
-    @group=Group.new(group_params)
-    @group.owner_id=current_user.id
+    @group = Group.new(group_params)
+    @group.owner_id = current_user.id
     if @group.save
       @group.owner_user.group_members.create(group_id: @group.id)
       redirect_to groups_path
@@ -15,11 +15,11 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group=Group.find(params[:id])
+    @group = Group.find(params[:id])
   end
 
   def update
-    @group=Group.find(params[:id])
+    @group = Group.find(params[:id])
     if @group.update(group_params)
       redirect_to groups_path
     else
@@ -28,19 +28,18 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @book=Book.new()
-    @groups=Group.all
+    @book = Book.new
+    @groups = Group.all
   end
 
   def show
-    @group=Group.find(params[:id])
-    @book=Book.new()
+    @group = Group.find(params[:id])
+    @book = Book.new
   end
 
   private
 
   def group_params
-    params.require(:group).permit(:group_name,:introduction,:image)
+    params.require(:group).permit(:group_name, :introduction, :image)
   end
-
 end

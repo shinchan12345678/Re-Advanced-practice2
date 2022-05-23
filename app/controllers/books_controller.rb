@@ -1,39 +1,38 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit,:update,:destroy]
-
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
     @book = Book.find(params[:id])
-    book_view =BookView.find_by(book_id: @book.id,user_id: current_user.id)
+    book_view = BookView.find_by(book_id: @book.id, user_id: current_user.id)
     if book_view
-      sum = book_view.counter+1
-      book_view.update(book_id: @book.id,user_id: current_user.id,counter: sum)
+      sum = book_view.counter + 1
+      book_view.update(book_id: @book.id, user_id: current_user.id, counter: sum)
     else
-      BookView.create(book_id: @book.id,user_id: current_user.id,counter: 1)
+      BookView.create(book_id: @book.id, user_id: current_user.id, counter: 1)
     end
-    @book_view =BookView.find_by(book_id: @book.id,user_id: current_user.id)
+    @book_view = BookView.find_by(book_id: @book.id, user_id: current_user.id)
   end
 
   def index
     # @books = Book.order_all_between
     # binding.pry
-    to  = Time.current.at_end_of_day
-    from  = (to - 6.day).at_beginning_of_day
-    @books = Book.all.sort {|a,b|
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.all.sort do |a, b|
       b.favorites.where(created_at: from...to).size <=>
       a.favorites.where(created_at: from...to).size
-    }
-    @book=Book.new
+    end
+    @book = Book.new
   end
 
   def create
     # binding.pry
     @book = Book.new(book_params)
-    unless Category.find_by(category_name: params.require(:book)[:category_name])
-      category=Category.create(category_params)
+    if Category.find_by(category_name: params.require(:book)[:category_name])
+      category = Category.find_by(category_name: params.require(:book)[:category_name])
     else
-      category=Category.find_by(category_name: params.require(:book)[:category_name])
+      category = Category.create(category_params)
     end
     # binding.pry
     @book.user_id = current_user.id
@@ -70,11 +69,11 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title,:body,:rate)
+    params.require(:book).permit(:title, :body, :rate)
   end
 
   def book_update_params
-    params.require(:book).permit(:title,:body)
+    params.require(:book).permit(:title, :body)
   end
 
   def category_params
@@ -87,5 +86,4 @@ class BooksController < ApplicationController
       redirect_to books_path
     end
   end
-
 end
